@@ -1,0 +1,69 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int students, subjects;
+
+    cout << "===== STUDENT GRADE MATRIX ANALYZER =====\n";
+    cout << "Enter number of students: ";
+    cin >> students;
+    cout << "Enter number of subjects: ";
+    cin >> subjects;
+
+    // Store grades in a 2D vector
+    vector<vector<int>> grades(students, vector<int>(subjects));
+
+    // Input grades
+    cout << "\nEnter grades:\n";
+    for (int i = 0; i < students; i++) {
+        cout << "Student " << i + 1 << ":\n";
+        for (int j = 0; j < subjects; j++) {
+            cout << "  Subject " << j + 1 << ": ";
+            cin >> grades[i][j];
+        }
+    }
+
+    // Display grade matrix
+    cout << "\n===== GRADE MATRIX =====\n";
+    for (int i = 0; i < students; i++) {
+        cout << "Student " << i + 1 << ": ";
+        for (int j = 0; j < subjects; j++) {
+            cout << grades[i][j];
+            if (j < subjects - 1) cout << " | ";
+        }
+        cout << endl;
+    }
+
+    // Compute average grade of each student
+    cout << "\n===== AVERAGE GRADE PER STUDENT =====\n";
+    for (int i = 0; i < students; i++) {
+        int sum = 0;
+        for (int j = 0; j < subjects; j++) {
+            sum += grades[i][j];
+        }
+        double avg = (double)sum / subjects;
+        cout << "Student " << i + 1 << " Average: " << avg << endl;
+    }
+
+    // Identify highest grade in the matrix
+    int highest = grades[0][0];
+    int highestStudent = 1, highestSubject = 1;
+
+    for (int i = 0; i < students; i++) {
+        for (int j = 0; j < subjects; j++) {
+            if (grades[i][j] > highest) {
+                highest = grades[i][j];
+                highestStudent = i + 1;
+                highestSubject = j + 1;
+            }
+        }
+    }
+
+    cout << "\n===== HIGHEST GRADE =====\n";
+    cout << "Highest Grade: " << highest
+         << " (Student " << highestStudent
+         << ", Subject " << highestSubject << ")\n";
+
+    return 0;
+}
