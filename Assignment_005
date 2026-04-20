@@ -1,0 +1,42 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    // Step 1: Write to original.txt
+    ofstream outFile("original.txt");
+    outFile << "One\n";
+    outFile << "Two\n";
+    outFile << "Three\n";
+    outFile << "Four\n";
+    outFile << "Five\n";
+    outFile << "Six\n";
+    outFile.close();
+
+    // Step 2: Read from original.txt
+    ifstream inFile("original.txt");
+    vector<string> words;
+    string line;
+
+    while (getline(inFile, line)) {
+        words.push_back(line);
+    }
+    inFile.close();
+
+    // Step 3: Sort alphabetically
+    sort(words.begin(), words.end());
+
+    // Step 4: Write to sorted.txt
+    ofstream sortedFile("sorted.txt");
+    for (string w : words) {
+        sortedFile << w << endl;
+    }
+    sortedFile.close();
+
+    cout << "Sorting complete. Check sorted.txt" << endl;
+
+    return 0;
+}
